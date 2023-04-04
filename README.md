@@ -17,4 +17,4 @@ Backend plan:
   4. x Get products from single category. (Category page)
   5. x Get search result, it should use a filter to find matched result from No.1 all products api response.
   6. x Get product detail by product id. (Product page)
-  7. Post customer details, trigger mail system to sale person. (Enquiry page / Product page)
+  7. x Post customer details, trigger mail system to sale person. (Enquiry page / Product page)
