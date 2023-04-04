@@ -1,10 +1,11 @@
 import React from 'react';
+import Navigation from '../../components/Navigation';
 
 const PostSalePage = () => {
   return (
     <>
-      <div>hello</div>
-      <div>Category page</div>
+      <Navigation />
+      <div>Thank you</div>
     </>
   );
 };
