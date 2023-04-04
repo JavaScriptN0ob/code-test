@@ -16,9 +16,19 @@ const getCategories = async (_, res) => {
   const categories = await productModel.getCategories();
 
   handleResult(categories, res);
-}
+};
+
+const getProductsFromCategory = async (req, res) => {
+  // Followed by fakestore common convention api use params, I do prefer use query for this!
+  const { category } = req.params;
+
+  const products = await productModel.getProductsFromCategory(category);
+
+  handleResult(products, res);
+};
 
 module.exports={
   getProducts,
   getCategories,
+  getProductsFromCategory,
 }

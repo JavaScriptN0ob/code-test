@@ -34,7 +34,18 @@ const getCategories = async () => {
   }
 };
 
+const getProductsFromCategory = async (category) => {
+  try {
+    const { data: products } = await axiosInstance.get(`/products/category/${category}`)
+
+    return sortProductsByRates(products);
+  } catch (error) {
+    displayErrorToLog(error);
+  }
+};
+
 module.exports = {
   getProducts,
   getCategories,
+  getProductsFromCategory,
 };
