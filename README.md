@@ -4,6 +4,13 @@
 
 Author: Wayne
 
+How to run this locally:
+1. You need to `~/backend/src/model/productModel.js` -> line: 84. Replace the email address with other email address.
+2. At the same file, line: 86 ~ 93, kindly register or use your gmail to register a app use password.
+3. Create a `.env` under `~/backend/` and paste the 16 digits password, format looks like `AUTH_EMAIL_PASSWORD = 16 digits pwd`
+4. Under `/backend` please run `npm run dev / npm run start` Backend on port 4000
+5. Under `/frontend` please run `npm run start` Front on port 3000
+
 Frontend plan:
   It will cover only simple CSS and UX, more focused on Form control and multi-pages
   Design:
