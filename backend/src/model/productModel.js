@@ -66,10 +66,21 @@ const getProductBySearchInput = async (searchInput) => {
   }
 };
 
+const getProductById = async (productId) => {
+  try {
+    const { data: product } = await axiosInstance.get(`/products/${productId}`);
+
+    return product;
+  } catch (error) {
+    displayErrorToLog(error);
+  }
+};
+
 module.exports = {
   getProducts,
   getFiveTopRatedProducts,
   getCategories,
   getProductsFromCategory,
   getProductBySearchInput,
+  getProductById,
 };

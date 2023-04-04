@@ -50,8 +50,23 @@ const getProductsFromCategory = async (req, res) => {
   handleResult(products, res);
 };
 
+const getProductById = async (req, res) => {
+  const { productId } = req.query;
+
+  if (!productId) return res.status(405).send('Invalid params, need a correct product id.');
+
+  const product = await productModel.getProductById(productId);
+
+  // handleResult(product, res)
+  // Utilize a special error-handler here to make frontend easier catching.
+  if (!product) return res.status(404).send('Product not found, please check logs for more.');
+
+  handleResult(product, res);
+};
+
 module.exports={
   getProducts,
   getCategories,
   getProductsFromCategory,
+  getProductById,
 }
