@@ -5,9 +5,9 @@ const displayErrorToLog = require('../utils/displayErrorToLog');
 
 const getProducts = async () => {
   try {
-    const { data } =  await axiosInstance.get('/products');
+    const { data: products } =  await axiosInstance.get('/products');
 
-    return data;
+    return products;
   } catch (error) {
     displayErrorToLog(error);
     // console.warn(`Error occurs when calling fake store api. Error: ${error.message || error.cause}`);
@@ -22,9 +22,19 @@ const getFiveTopRatedProducts = async () => {
   } catch (error) {
     displayErrorToLog(error);
   }
-}
+};
+
+const getCategories = async () => {
+  try {
+    const { data: categories } = await axiosInstance.get('/products/categories');
+
+    return categories;
+  } catch (error) {
+    displayErrorToLog(error);
+  }
+};
 
 module.exports = {
   getProducts,
-  getFiveTopRatedProducts,
+  getCategories,
 };
