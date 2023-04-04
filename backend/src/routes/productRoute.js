@@ -9,4 +9,6 @@ router.get('/product', productController.getProductById);
 router.get('/products/categories', productController.getCategories);
 router.get('/products/category/:category', productController.getProductsFromCategory);
 
+router.post('/enquiry', productController.enquireProduct);
+
 module.exports = router;

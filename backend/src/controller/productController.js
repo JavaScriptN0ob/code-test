@@ -64,9 +64,32 @@ const getProductById = async (req, res) => {
   handleResult(product, res);
 };
 
+const enquireProduct = async (req, res) => {
+  const { productId, customerDetails } =  req.body;
+
+  if (
+    !productId || 
+    !customerDetails?.firstName || 
+    !customerDetails?.lastName || 
+    !customerDetails?.email || 
+    !customerDetails?.mobile
+  ) {
+    return res.status(405).send('Invalid customer details, please check your enquiry form!');
+  }
+
+  const enquireProductResult = await productModel.enquireProduct(productId, customerDetails);
+  console.log(777, enquireProductResult);
+  if (!enquireProductResult || enquireProductResult !== 'succeed') {
+    return res.status(400).send('Enquire failed. Please contact the shop.')
+  }
+
+  return res.status(201).send('Thank you. An email had send to our sale person.');
+};
+
 module.exports={
   getProducts,
   getCategories,
   getProductsFromCategory,
   getProductById,
+  enquireProduct,
 }

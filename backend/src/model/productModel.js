@@ -1,3 +1,5 @@
+const nodemailer = require('nodemailer');
+
 const axiosInstance = require('../axios/axiosInstance');
 const sortProductsByRates = require('../utils/sortProductsByRates');
 const sliceProducts = require('../utils/sliceProducts');
@@ -76,6 +78,41 @@ const getProductById = async (productId) => {
   }
 };
 
+const enquireProduct = async (productId, customerDetails) => {
+  const { firstName, lastName, email, mobile } = customerDetails;
+  // This should replaced by sale person's email address;
+  const salePersonEmail = 'wenpeijs@gmail.com';
+
+  // I choose to use nodemailer as it is free!! hmmm!!
+  const auth = {
+    user: 'officeworkcodetest@gmail.com',
+    // Generate through gmail personal hub
+    // For more help please check this stack-overflow down blew
+    // https://stackoverflow.com/questions/45478293/username-and-password-not-accepted-when-using-nodemailer
+    pass: process.env.AUTH_EMAIL_PASSWORD,
+  }
+  const emailTransporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth,
+  });
+  const emailConfig = {
+    from: auth.user,
+    to: salePersonEmail,
+    subject: '(DEV-USE-TEST-ONLY)A new enquiry from the customer',
+    text: `${firstName} ${lastName} had enquired ${productId}, customer's email is ${email} and mobile is ${mobile}`,
+  }
+
+  emailTransporter.sendMail(emailConfig, (error, info) => {
+    if (!!error) {
+      console.warn(`An error occurs when sending email, please check backend logs and code comments.`);
+    }
+
+    console.log(`Email had sent to ${info?.accepted[0]}`);
+  });
+
+  return 'succeed';
+};
+
 module.exports = {
   getProducts,
   getFiveTopRatedProducts,
@@ -83,4 +120,5 @@ module.exports = {
   getProductsFromCategory,
   getProductBySearchInput,
   getProductById,
+  enquireProduct,
 };
