@@ -22,6 +22,13 @@ const getProductsFromCategory = async (req, res) => {
   // Followed by fakestore common convention api use params, I do prefer use query for this!
   const { category } = req.params;
 
+  // I made a silly mistake when I was log the result of this, due to I typed wrong category
+  // So I decide to add a validation here.
+  const validCategories = ['electronics', 'jewelery', 'men\'s clothing', 'women\'s clothing'];
+  if (!validCategories.includes(category)) {
+    return res.status(404).send('Invalid category!');
+  }
+
   const products = await productModel.getProductsFromCategory(category);
 
   handleResult(products, res);
