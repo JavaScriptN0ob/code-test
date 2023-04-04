@@ -5,6 +5,9 @@
 Author: Wayne
 
 Frontend plan:
+  It will cover only simple CSS and UX, more focused on Form control and multi-pages
+  Design:
+  ![](frontend-plan.png)
 
 Backend plan:
   Backend should use Express due to OW majorly use express daily. I prefer to separate the backend into few components and folders. It includes: model, controller, routes and utility combined of all necessary and reuseable helper or functions.
