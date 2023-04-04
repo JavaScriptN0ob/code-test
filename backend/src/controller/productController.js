@@ -1,15 +1,31 @@
 const productModel = require('../model/productModel');
 const handleResult = require('../utils/handleResult');
 
-const getProducts = async (_, res) => {
-  const products = await productModel.getFiveTopRatedProducts();
+const getProducts = async (req, res) => {
+  // I did this after getProductsFromCategory function.
+  // I still prefer to stick with the correct format
+  // So I decided to use query instead of params.
+  const { searchInput } = req.query;
 
-  // if (!products) {
-  //   res.status(500).send('Error occurs in backend, please check the backend logs.')
-  // }
+  if (!searchInput) {
+    const products = await productModel.getFiveTopRatedProducts();
+  
+    // if (!products) {
+    //   res.status(500).send('Error occurs in backend, please check the backend logs.')
+    // }
+  
+    // return res.status(200).send(products);
+    return handleResult(products, res);
+  }
 
-  // return res.status(200).send(products);
-  handleResult(products, res);
+  const searchedProducts = await productModel.getProductBySearchInput(searchInput);
+
+  if (!searchedProducts) {
+    // I use customized https code for this response, to make frontend easier catching.
+    return res.status(404).send('No matched product(s) found!');
+  }
+  
+  handleResult(searchedProducts, res);
 };
 
 const getCategories = async (_, res) => {

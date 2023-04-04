@@ -15,5 +15,5 @@ Backend plan:
   2. x Get top 5 rated products. (Homepage)
   3. x Get categories. (Category page)
   4. x Get products from single category. (Category page)
-  5. Get search result, it should use a filter to find matched result from No.1 all products api response.
+  5. x Get search result, it should use a filter to find matched result from No.1 all products api response.
   6. Post customer details, trigger mail system to sale person. (Enquiry page / Product page)

@@ -44,8 +44,32 @@ const getProductsFromCategory = async (category) => {
   }
 };
 
+const getProductBySearchInput = async (searchInput) => {
+  try {
+    const products = await getProducts();
+
+    const searchedProducts = products.filter((product) => {
+      // It should return result(s) if title or description matched and without case sensitive.
+      const { title, description } = product;
+
+      const lowerCasedSearchInput = searchInput.toLowerCase();
+      const lowerCasedTitle = title.toLowerCase();
+      const lowerCasedDescription = description.toLowerCase();
+
+      return lowerCasedTitle.includes(lowerCasedSearchInput) || lowerCasedDescription.includes(lowerCasedSearchInput);
+    });
+
+    // Incase searched products includes more than 1, I put them into a nested array;
+    return [...searchedProducts]
+  } catch (error) {
+    displayErrorToLog(error);
+  }
+};
+
 module.exports = {
   getProducts,
+  getFiveTopRatedProducts,
   getCategories,
   getProductsFromCategory,
+  getProductBySearchInput,
 };
